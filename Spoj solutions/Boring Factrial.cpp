@@ -50,6 +50,6 @@ int main(){
 			n++;
 		}
 		printf("%lld\n",p+ans);
-	}   
+	}
     return 0;
 }
