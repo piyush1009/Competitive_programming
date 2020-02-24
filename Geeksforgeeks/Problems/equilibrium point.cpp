@@ -25,46 +25,40 @@ int main(){
     cin>>t;
     while(t--)
     {
-        ll m,n,sum=0;
-        cin>>m>>n;
-        ll a[m+5],b[n+5],y[5]={0};
-        rep(i,0,m)
+        ll n,i,j;
+        cin>>n;
+        ll a[n+5];
+        rep(i,0,n)
         cin>>a[i];
-        rep(i,0,n)
-        cin>>b[i];
-        rep(i,0,n)
+        ll sum1=0,sum2=0;
+        i=0;j=n-1;
+        ll co=0;
+        while(i<=j)
         {
-        	if(b[i]<5)
-        	{
-        		y[b[i]]++;
-			}
-		}
-        sort(b,b+n);
-        rep(i,0,m)
-        {
-        	if(a[i]==1)
+            if(sum1==sum2)
             {
-            	sum+=y[0];
-			}
-			else
-			{
-				rep(j,0,n)
+                if(i==j)
                 {
-				    if(a[i]<b[j])
-                    {
-                        sum=sum+n-j;
-                        break;
-                    }
-					if(a[i]==2)
-					sum-=y[3]+y[4];
-					if(a[i]==3)
-					sum+=y[2];	
-                }
-			}
+                	cout<<i+1<<endl;
+                	co=1;
+                    break;
+				}
+            }
+            if(sum1<=sum2)
+            {
+                sum1+=a[i];
+                i++;
+            }
+            else
+            {
+                sum2+=a[j];
+                j--;
+            }
         }
-        cout<<sum<<endl;
-    }
-    
-    
+        if(co==0)
+        {
+            cout<<-1<<endl;
+        }
+    }   
     return 0;
 }

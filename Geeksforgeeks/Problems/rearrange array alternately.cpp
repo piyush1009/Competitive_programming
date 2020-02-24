@@ -25,46 +25,35 @@ int main(){
     cin>>t;
     while(t--)
     {
-        ll m,n,sum=0;
-        cin>>m>>n;
-        ll a[m+5],b[n+5],y[5]={0};
-        rep(i,0,m)
+        ll n;
+        cin>>n;
+        ll a[n+5];
+        rep(i,0,n)
         cin>>a[i];
-        rep(i,0,n)
-        cin>>b[i];
+        ll maxy=*max_element(a,a+n)+1;
+        ll max=n-1,min=0;
+        ll new_ele_max=a[max];
+        ll new_ele_min=a[min];
         rep(i,0,n)
         {
-        	if(b[i]<5)
-        	{
-        		y[b[i]]++;
-			}
-		}
-        sort(b,b+n);
-        rep(i,0,m)
-        {
-        	if(a[i]==1)
+            if(i%2==0)
             {
-            	sum+=y[0];
-			}
-			else
-			{
-				rep(j,0,n)
-                {
-				    if(a[i]<b[j])
-                    {
-                        sum=sum+n-j;
-                        break;
-                    }
-					if(a[i]==2)
-					sum-=y[3]+y[4];
-					if(a[i]==3)
-					sum+=y[2];	
-                }
-			}
+                a[i]=a[i]+maxy*(new_ele_max%maxy);
+                max--;
+                new_ele_max=a[max];
+            }
+            else
+            {
+                a[i]=a[i]+maxy*(new_ele_min%maxy);
+                min++;
+                new_ele_min=a[min];
+            }
         }
-        cout<<sum<<endl;
+        rep(i,0,n)
+        {
+            cout<<a[i]/maxy<<" ";
+        }
+        cout<<endl;
     }
-    
-    
     return 0;
 }
