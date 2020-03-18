@@ -11,6 +11,9 @@ bool sortbyfir(activity s1,activity s2)
 } 
 
 int main() {
+	ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     int t;
     cin>>t;
     while(t--)
@@ -20,13 +23,9 @@ int main() {
 	    activity a[n];
 	    for(int i=0;i<n;i++)
 	    {
-	        cin>>a[i].start;
+	        cin>>a[i].start>>a[i].finish;
 	        a[i].index=i;
 	    }
-        for(int i=0;i<n;i++)
-        {
-	        cin>>a[i].finish;
-        }
         sort(a,a+n,sortbyfir);
         int i=0,j;
         int k=1;
