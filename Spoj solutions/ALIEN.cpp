@@ -21,34 +21,48 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    ll n,k,i;
-    cin>>n;
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+    ll n,m,sum=0,maxx=0,j=0,i=0,ans=1000005;
+    cin>>n>>m;
     ll a[n+5];
     rep(i,0,n)
     cin>>a[i];
-    cin>>k;
-    deque<ll> d(k);
-    for(i=0;i<k;i++)
+    ll size=0,x=0;
+    rep(i,0,n)
     {
-    	while(!d.empty()&&a[i]>a[d.back()])
+    	if(sum+a[i]>m)
     	{
-    		d.pop_back();
+    		sum+=a[i];
+			size++;
+    		while(sum>m)
+    		{
+    			sum-=a[x];
+    			size--;
+    			x++;
+			}
 		}
-		d.push_back(i);
+		else
+		{
+			sum=sum+a[i];
+			size++;
+		}
+		if(maxx<size)
+		{
+			maxx=size;
+			ans=sum;
+		}
+		else if(maxx==size)
+		{
+			if(ans>sum)
+			{
+				ans=sum;
+			}			
+		}
 	}
-    for(;i<n;i++)
-    {
-    	cout<<a[d.front()]<<" ";
-    	while(!d.empty()&&d.front()<=i-k)
-    	{
-    		d.pop_front();
-		}
-		while(!d.empty()&&a[i]>=a[d.back()])
-    	{
-    		d.pop_back();
-		}
-		d.push_back(i);
+	cout<<ans<<" "<<maxx<<endl;
 	}
-	cout<<a[d.front()];
     return 0;
 }
